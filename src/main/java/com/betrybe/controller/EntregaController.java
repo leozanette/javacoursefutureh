@@ -1,5 +1,6 @@
 package com.betrybe.controller;
 
+import java.io.File;
 import java.util.List;
 import com.betrybe.model.Entrega;
 import com.betrybe.service.EntregaService;
@@ -22,5 +23,13 @@ public class EntregaController {
     List<Entrega> entregas = entregaService.listar();
 
     return entregas;
+  }
+
+  @Path("/video")
+  @GET
+  public List<File> listarVideos() {
+    List<File> videos = entregaService.listarVideos();
+
+    return videos;
   }
 }

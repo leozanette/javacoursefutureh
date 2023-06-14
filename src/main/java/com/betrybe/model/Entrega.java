@@ -1,5 +1,6 @@
 package com.betrybe.model;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
@@ -11,6 +12,7 @@ public class Entrega extends PanacheEntity {
   private LocalDateTime dataEntrega;
   private LocalDateTime dataRetirada;
   private StatusEntrega status;
+  private File video;
 
   @ManyToOne
   private Drone drone;
@@ -55,6 +57,14 @@ public class Entrega extends PanacheEntity {
   public void setDataRetirada() {
     LocalDateTime dataRetirada = LocalDateTime.now();
     this.dataRetirada = dataRetirada;
+  }
+
+  public File getVideo() {
+    return video;
+  }
+
+  public void setVideo(File video) {
+    this.video = video;
   }
 
 
