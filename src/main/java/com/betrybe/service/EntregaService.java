@@ -3,6 +3,7 @@ package com.betrybe.service;
 import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.jboss.resteasy.reactive.multipart.FileUpload;
 import com.betrybe.model.Entrega;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -20,4 +21,10 @@ public class EntregaService {
     return videos;
   }
 
+  public void iserirVideo(Long id, FileUpload file) {
+    Entrega entrega = Entrega.findById(id);
+    entrega.setVideo(file);
+
+    Entrega.persist(entrega);
+  }
 }
