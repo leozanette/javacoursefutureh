@@ -1,10 +1,11 @@
 package com.betrybe.model;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Entrega extends PanacheEntity {
@@ -12,7 +13,10 @@ public class Entrega extends PanacheEntity {
   private LocalDateTime dataEntrega;
   private LocalDateTime dataRetirada;
   private StatusEntrega status;
-  private File video;
+
+  @OneToOne
+  @JsonbTransient
+  private Video video;
 
   @ManyToOne
   private Drone drone;
@@ -59,11 +63,11 @@ public class Entrega extends PanacheEntity {
     this.dataRetirada = dataRetirada;
   }
 
-  public File getVideo() {
+  public Video getVideo() {
     return video;
   }
 
-  public void setVideo(File video) {
+  public void setVideo(Video video) {
     this.video = video;
   }
 
