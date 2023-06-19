@@ -1,6 +1,8 @@
 package com.betrybe.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 import com.betrybe.model.FormData;
 import com.betrybe.model.Video;
@@ -35,5 +37,16 @@ public class VideoController {
   public Response publicarVideo(@PathParam("id") Long id, FormData file) throws IOException {
     Video video = videoService.sendUpload(id, file);
     return Response.ok(video).status(201).build();
+  }
+
+  @Path("/{id}")
+  @GET
+  @Produces(MediaType.APPLICATION_OCTET_STREAM)
+  public Response downloadVideo(@PathParam("id") Long id) {
+    // Video video = Video.findById(id);
+    File download = videoService.download(id);
+
+    String contentDisposition = "attachment; filename=\"" + download.getName() + "\"";
+    return Response.ok(download).header("Content-Disposition", contentDisposition).build();
   }
 }

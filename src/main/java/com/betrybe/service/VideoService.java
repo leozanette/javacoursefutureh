@@ -1,6 +1,8 @@
 package com.betrybe.service;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
@@ -12,6 +14,7 @@ import com.betrybe.model.FormData;
 import com.betrybe.model.Video;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.UriBuilder;
 
 @ApplicationScoped
 public class VideoService {
@@ -42,9 +45,14 @@ public class VideoService {
     entrega.setVideo(video);
 
     Video.persist(video);
-    // Entrega.persist(entrega);
 
     Files.copy(data.getFile().filePath(), Paths.get(directory + fileName));
     return video;
+  }
+
+  public File download(Long id) {
+    Video video = Video.findById(id);
+    String filePath = Paths.get(directory, video.getKeyName()).toString();
+    return new File(filePath);
   }
 }
