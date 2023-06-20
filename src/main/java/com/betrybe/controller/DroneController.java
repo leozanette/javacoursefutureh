@@ -1,6 +1,5 @@
 package com.betrybe.controller;
 
-import java.util.List;
 import com.betrybe.dto.DroneDto;
 import com.betrybe.model.Drone;
 import com.betrybe.service.DroneService;
@@ -14,7 +13,13 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import java.util.List;
 
+/**
+ * CRUD controller.
+ *
+ */
 @Path("/drone")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,16 +28,20 @@ public class DroneController {
   @Inject
   private DroneService droneService;
 
+  /**
+   * metodo para lsitar todos os drones.
+   */
   @GET
-  public List<Drone> listar() {
+  public Response listar() {
     List<Drone> drones = droneService.listar();
 
-    return drones;
+    return Response.ok(drones).status(200).build();
   }
 
   @POST
-  public void salvar(DroneDto droneDto) {
+  public Response salvar(DroneDto droneDto) {
     droneService.salvar(droneDto);
+    return Response.ok().status(201).build();
   }
 
   @Path("{id}")
@@ -43,19 +52,8 @@ public class DroneController {
 
   @Path("{id}")
   @DELETE
-  public void atualizar(@PathParam("id") Long id) {
+  public void deletar(@PathParam("id") Long id) {
     droneService.deletar(id);
   }
 
-  @Path("/retirar/{id}")
-  @PUT
-  public void retirarEntrega(@PathParam("id") Long id) {
-    droneService.retirarEntrega(id);
-  }
-
-  @Path("/entregar/{id}")
-  @PUT
-  public void entregarEntrega(@PathParam("id") Long id) {
-    droneService.entregarEntrega(id);
-  }
 }

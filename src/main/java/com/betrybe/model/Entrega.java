@@ -1,12 +1,16 @@
 package com.betrybe.model;
 
-import java.time.LocalDateTime;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import java.time.LocalDateTime;
 
+/**
+ * classe entrega.
+ *
+ */
 @Entity
 public class Entrega extends PanacheEntity {
   private Long id;

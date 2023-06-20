@@ -1,10 +1,14 @@
 package com.betrybe.model;
 
-import java.util.Date;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
+import java.util.Date;
 
+/**
+ * classe video para salvar o arquivo no db.
+ *
+ */
 @Entity
 public class Video extends PanacheEntity {
 

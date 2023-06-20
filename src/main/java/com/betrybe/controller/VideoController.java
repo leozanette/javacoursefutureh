@@ -1,9 +1,5 @@
 package com.betrybe.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.util.List;
 import com.betrybe.model.FormData;
 import com.betrybe.model.Video;
 import com.betrybe.service.VideoService;
@@ -16,7 +12,14 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
+/**
+ * controller da entidade video.
+ *
+ */
 @Path("/video")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -25,6 +28,9 @@ public class VideoController {
   @Inject
   private VideoService videoService;
 
+  /**
+   * metodo listar todos os videos.
+   */
   @GET
   public List<Video> listarVideos() {
     List<Video> videos = videoService.listarVideos();
@@ -39,11 +45,13 @@ public class VideoController {
     return Response.ok(video).status(201).build();
   }
 
+  /**
+   * param id procura video pelo id return video para download.
+   */
   @Path("/{id}")
   @GET
   @Produces(MediaType.APPLICATION_OCTET_STREAM)
   public Response downloadVideo(@PathParam("id") Long id) {
-    // Video video = Video.findById(id);
     File download = videoService.download(id);
 
     String contentDisposition = "attachment; filename=\"" + download.getName() + "\"";

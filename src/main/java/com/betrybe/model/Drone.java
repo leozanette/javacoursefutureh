@@ -1,9 +1,13 @@
 package com.betrybe.model;
 
-import java.util.Random;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
+import java.util.Random;
 
+/**
+ * drone entity.
+ *
+ */
 @Entity
 public class Drone extends PanacheEntity {
 
@@ -32,6 +36,9 @@ public class Drone extends PanacheEntity {
     return latitude;
   }
 
+  /**
+   * metodo para setar latitude de modo randomico.
+   */
   public void setLatitude() {
     Random random = new Random();
     int randomNumber = random.nextInt(18000001) - 9000000;
@@ -45,6 +52,9 @@ public class Drone extends PanacheEntity {
     return longitude;
   }
 
+  /**
+   * metodo para setar longitude de modo randomico.
+   */
   public void setLongitude() {
     Random random = new Random();
     int randomNumber = random.nextInt(36000001) - 18000000;

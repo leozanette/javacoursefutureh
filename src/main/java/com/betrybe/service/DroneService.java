@@ -1,13 +1,17 @@
 package com.betrybe.service;
 
-import java.util.List;
 import com.betrybe.dto.DroneDto;
 import com.betrybe.model.Drone;
 import com.betrybe.model.Entrega;
 import com.betrybe.model.StatusEntrega;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import java.util.List;
 
+/**
+ * Service da entity Drone.
+ *
+ */
 @ApplicationScoped
 public class DroneService {
 
@@ -15,6 +19,9 @@ public class DroneService {
     return Drone.listAll();
   }
 
+  /**
+   * save drone no db utilizando o data transfer object droneDto.
+   */
   @Transactional
   public void salvar(DroneDto droneDto) {
     Drone drone = new Drone();
@@ -24,6 +31,10 @@ public class DroneService {
     Drone.persist(drone);
   }
 
+  /**
+   * Método para atualizar um drone. param id ID utilizado para localizar o drone param droneDto
+   * Objeto contendo o modelo do drone.
+   */
   @Transactional
   public void atualizar(Long id, DroneDto droneDto) {
     Drone drone = Drone.findById(id);
@@ -36,33 +47,6 @@ public class DroneService {
   @Transactional
   public void deletar(Long id) {
     Drone.deleteById(id);
-  }
-
-  @Transactional
-  public void retirarEntrega(Long id) {
-    Drone drone = Drone.findById(id);
-    drone.setLatitude();
-    drone.setLongitude();
-    Drone.persist(drone);
-
-    Entrega entrega = new Entrega();
-    entrega.setStatus(StatusEntrega.PENDENTE);
-    entrega.setDataRetirada();
-    entrega.setDrone(drone);
-    Entrega.persist(entrega);
-  }
-
-  @Transactional
-  public void entregarEntrega(Long id) {
-    Entrega entrega = Entrega.findById(id);
-    Drone drone = entrega.getDrone();
-    drone.setLatitude();
-    drone.setLongitude();
-    Drone.persist(drone);
-
-    entrega.setStatus(StatusEntrega.OK);
-    entrega.setDataEntrega();
-    Entrega.persist(entrega);
   }
 
 }

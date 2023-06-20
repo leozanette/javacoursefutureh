@@ -1,25 +1,25 @@
 package com.betrybe.service;
 
+import com.betrybe.model.Entrega;
+import com.betrybe.model.FormData;
+import com.betrybe.model.Video;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import com.betrybe.model.Entrega;
-import com.betrybe.model.FormData;
-import com.betrybe.model.Video;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.transaction.Transactional;
-import jakarta.ws.rs.core.UriBuilder;
 
+/**
+ * service da classe video.
+ *
+ */
 @ApplicationScoped
 public class VideoService {
-
-
 
   @ConfigProperty(name = "quarkus.http.body.uploads-directory")
   String directory;
@@ -29,6 +29,9 @@ public class VideoService {
     return videos;
   }
 
+  /**
+   * metodo para upload de arquivo.
+   */
   @Transactional
   public Video sendUpload(Long id, FormData data) throws IOException {
     Video video = new Video();
@@ -50,6 +53,10 @@ public class VideoService {
     return video;
   }
 
+  /**
+   * param id para encontrar o video.
+   * 
+   */
   public File download(Long id) {
     Video video = Video.findById(id);
     String filePath = Paths.get(directory, video.getKeyName()).toString();
