@@ -1,16 +1,19 @@
 package com.betrybe.controller;
 
 import com.betrybe.model.Entrega;
+import com.betrybe.service.DroneService;
 import com.betrybe.service.EntregaService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -24,31 +27,37 @@ public class EntregaController {
   @Inject
   private EntregaService entregaService;
 
+  @Inject
+  private DroneService droneService;
+
   /**
    * metodo para listar todas as entegas.
    */
   @GET
-  public List<Entrega> listar() {
+  public Response listar() {
     List<Entrega> entregas = entregaService.listar();
 
-    return entregas;
+    return Response.ok(entregas).status(200).build();
   }
 
   @Path("/retirar/{id}")
   @PUT
-  public void retirarEntrega(@PathParam("id") Long id) {
+  public Response retirarEntrega(@PathParam("id") Long id) {
     entregaService.retirarEntrega(id);
+    return Response.ok().status(201).build();
   }
 
   @Path("/entregar/{id}")
-  @PUT
-  public void entregarEntrega(@PathParam("id") Long id) {
+  @PATCH
+  public Response entregarEntrega(@PathParam("id") Long id) {
     entregaService.entregarEntrega(id);
+    return Response.ok().status(200).build();
   }
 
   @Path("{id}")
   @DELETE
-  public void deletar(@PathParam("id") Long id) {
+  public Response deletar(@PathParam("id") Long id) {
     entregaService.deletar(id);
+    return Response.ok().status(204).build();
   }
 }

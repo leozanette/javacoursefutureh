@@ -24,15 +24,15 @@ public class EntregaService {
    */
   @Transactional
   public void retirarEntrega(Long id) {
-    Drone drone = Drone.findById(id);
-    drone.setLatitude();
-    drone.setLongitude();
-    Drone.persist(drone);
+    // Drone drone = Drone.findById(id);
+    // drone.setLatitude();
+    // drone.setLongitude();
+    // Drone.persist(drone);
 
     Entrega entrega = new Entrega();
     entrega.setStatus(StatusEntrega.PENDENTE);
     entrega.setDataRetirada();
-    entrega.setDrone(drone);
+    entrega.setDrone(Drone.findById(id));
     Entrega.persist(entrega);
   }
 
@@ -42,10 +42,10 @@ public class EntregaService {
   @Transactional
   public void entregarEntrega(Long id) {
     Entrega entrega = Entrega.findById(id);
-    Drone drone = entrega.getDrone();
-    drone.setLatitude();
-    drone.setLongitude();
-    Drone.persist(drone);
+    // Drone drone = entrega.getDrone();
+    // drone.setLatitude();
+    // drone.setLongitude();
+    // Drone.persist(drone);
 
     entrega.setStatus(StatusEntrega.OK);
     entrega.setDataEntrega();

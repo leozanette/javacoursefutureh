@@ -46,14 +46,16 @@ public class DroneController {
 
   @Path("{id}")
   @PUT
-  public void atualizar(@PathParam("id") Long id, DroneDto droneDto) {
+  public Response atualizar(@PathParam("id") Long id, DroneDto droneDto) {
     droneService.atualizar(id, droneDto);
+    return Response.ok().status(200).build();
   }
 
   @Path("{id}")
   @DELETE
-  public void deletar(@PathParam("id") Long id) {
+  public Response deletar(@PathParam("id") Long id) {
     droneService.deletar(id);
+    return Response.ok().status(204).build();
   }
 
 }
