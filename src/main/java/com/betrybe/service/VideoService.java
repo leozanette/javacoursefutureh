@@ -35,7 +35,7 @@ public class VideoService {
   @Transactional
   public Video sendUpload(Long id, FormData data) throws IOException {
     Video video = new Video();
-    // Entrega entrega = Entrega.findById(id);
+    Entrega entrega = Entrega.findById(id);
 
     String fileName = UUID.randomUUID() + "-" + data.getFile().fileName();
 
@@ -44,8 +44,8 @@ public class VideoService {
     video.setMimetype(data.getFile().contentType());
     video.setFilesize(data.getFile().size());
     video.setCreatedAt(new Date());
-    video.setEntrega(Entrega.findById(id));
-    // entrega.setVideo(video);
+    video.setEntrega(entrega);
+    entrega.setVideo(video);
 
     Video.persist(video);
 
