@@ -2,8 +2,6 @@ package com.betrybe.service;
 
 import com.betrybe.dto.DroneDto;
 import com.betrybe.model.Drone;
-import com.betrybe.model.Entrega;
-import com.betrybe.model.StatusEntrega;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import java.util.List;

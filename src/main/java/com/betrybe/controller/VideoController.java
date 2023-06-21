@@ -32,10 +32,10 @@ public class VideoController {
    * metodo listar todos os videos.
    */
   @GET
-  public List<Video> listarVideos() {
+  public Response listarVideos() {
     List<Video> videos = videoService.listarVideos();
 
-    return videos;
+    return Response.ok(videos).status(200).build();
   }
 
   @Path("/{id}")
